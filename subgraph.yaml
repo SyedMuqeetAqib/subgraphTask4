@@ -1,0 +1,38 @@
+specVersion: 0.0.1
+schema:
+  file: ./schema.graphql
+dataSources:
+  - kind: ethereum
+    name: DaoStakeContract
+    network: mainnet
+    source:
+      address: "0xFa70F492D9f4fc28C8D6b9e65eac0B0AA363AF7F"
+      abi: DaoStakeContract
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.5
+      language: wasm/assemblyscript
+      entities:
+        - BaseInterestUpdated
+        - OwnershipTransferred
+        - Paused
+        - StakeCompleted
+        - Unpaused
+        - Unstake
+      abis:
+        - name: DaoStakeContract
+          file: ./abis/DaoStakeContract.json
+      eventHandlers:
+        - event: BaseInterestUpdated(uint256,uint256)
+          handler: handleBaseInterestUpdated
+        - event: OwnershipTransferred(indexed address,indexed address)
+          handler: handleOwnershipTransferred
+        - event: Paused(address)
+          handler: handlePaused
+        - event: StakeCompleted(uint256,uint256,uint256,uint256,address,address,address)
+          handler: handleStakeCompleted
+        - event: Unpaused(address)
+          handler: handleUnpaused
+        - event: Unstake(address,address,address,uint256,uint256)
+          handler: handleUnstake
+      file: ./src/mapping.ts
