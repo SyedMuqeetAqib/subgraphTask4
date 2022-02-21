@@ -1,6 +1,6 @@
 specVersion: 0.0.2
 schema:
-  file: ./schema.graphql
+  file: schema.graphql
 dataSources:
   - kind: ethereum
     name: DaoStakeContract
@@ -22,7 +22,7 @@ dataSources:
         - Unstake
       abis:
         - name: DaoStakeContract
-          file: ./abis/DaoStakeContract.json
+          file: DaoStakeContract\abis\DaoStakeContract.json
       eventHandlers:
         - event: BaseInterestUpdated(uint256,uint256)
           handler: handleBaseInterestUpdated
@@ -36,4 +36,4 @@ dataSources:
           handler: handleUnpaused
         - event: Unstake(address,address,address,uint256,uint256)
           handler: handleUnstake
-      file: ./src/mapping.ts
+      file: DaoStakeContract\DaoStakeContract.wasm
